@@ -19,6 +19,7 @@ A real-time smart city analytics project built for Roorkee using live weather, a
 
 ## 🚀 How to Run
 pip install -r requirements.txt
+
 streamlit run streamlit_app.py
 
 ## 📁 Project Structure
@@ -30,5 +31,4 @@ city-smart-pulse/
 └── README.md
 
 ## 👩‍💻 Built By
-Disha Sharma | B.Tech CSE | Haridwar University
-CSIR-CBRI Internship | June 2026
+Disha Sharma
