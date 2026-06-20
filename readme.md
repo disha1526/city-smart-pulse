@@ -30,5 +30,4 @@ city-smart-pulse/
 └── README.md
 
 ## 👩‍💻 Built By
-Disha Sharma | B.Tech CSE | Haridwar University
-CSIR-CBRI Internship | June 2026
+Disha Sharma | B.Tech CSE | Haridwar University| June 2026
