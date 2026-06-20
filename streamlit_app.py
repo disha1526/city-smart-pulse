@@ -54,7 +54,6 @@ st.markdown("---")
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/CSIR-CBRI_Logo.png/200px-CSIR-CBRI_Logo.png", width=120)
 st.sidebar.markdown("## ⚙️ Dashboard Controls")
 st.sidebar.markdown("**Built by:** Disha Sharma")
-st.sidebar.markdown("**Internship:** CSIR-CBRI Roorkee")
 st.sidebar.markdown("**Date:** June 2026")
 st.sidebar.markdown("---")
 show_raw = st.sidebar.checkbox("Show Raw Data Tables", value=False)
@@ -378,8 +377,7 @@ with tab4:
 st.markdown("---")
 st.markdown("""
     <p style='text-align:center; color:#555555; font-size:13px;'>
-    🏙️ City Smart Pulse | Built by <b>Disha Sharma</b> |
-    CSIR-CBRI Roorkee Internship 2026 |
+    🏙️ City Smart Pulse | Built by <b>Disha Sharma</b> 
     Data: Open-Meteo API
     </p>
 """, unsafe_allow_html=True)
