@@ -1,0 +1,8 @@
+pandas
+requests
+textblob
+scikit-learn
+statsmodels
+plotly
+streamlit
+openpyxl
