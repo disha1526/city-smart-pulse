@@ -9,6 +9,14 @@ st.set_page_config(
     page_icon="🏙️",
     layout="wide"
 )
+import time
+
+# Auto refresh every 60 seconds
+st.cache_data.clear()
+refresh = st.sidebar.slider("Auto-refresh (seconds)", 30, 300, 60)
+st.sidebar.write(f"Dashboard refreshes every {refresh} seconds")
+time.sleep(refresh)
+st.rerun()
 
 # ─── CUSTOM CSS (makes it look premium) ──────────────────
 st.markdown("""
@@ -58,6 +66,15 @@ st.sidebar.markdown("**Date:** June 2026")
 st.sidebar.markdown("---")
 show_raw = st.sidebar.checkbox("Show Raw Data Tables", value=False)
 chart_theme = st.sidebar.selectbox("Chart Theme", ["plotly_dark", "plotly", "ggplot2", "seaborn"])
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 🌤️ Roorkee Weather")
+try:
+    current, humidity, rain_prob = fetch_live_weather()
+    st.sidebar.metric("Temperature", f"{current['temperature']}°C")
+    st.sidebar.metric("Condition", get_weather_emoji(current['weathercode']))
+    st.sidebar.metric("Rain Chance", f"{rain_prob}%")
+except:
+    st.sidebar.write("Weather unavailable")
 
 # ─── DATA ────────────────────────────────────────────────
 import sqlite3
@@ -146,6 +163,60 @@ tab1, tab2, tab3, tab4 = st.tabs([
 # ════════════════════════════════════════════════
 # TAB 1 — WEATHER
 # ════════════════════════════════════════════════
+with tab1:
+    st.subheader("🌤️ Live Weather — Roorkee")
+
+    try:
+        current, humidity, rain_prob = fetch_live_weather()
+
+        # ── Weather KPI Cards ──
+        c1, c2, c3, c4, c5 = st.columns(5)
+
+        with c1:
+            st.metric(
+                "🌡️ Temperature",
+                f"{current['temperature']}°C"
+            )
+        with c2:
+            st.metric(
+                "💨 Wind Speed",
+                f"{current['windspeed']} km/h"
+            )
+        with c3:
+            st.metric(
+                "💧 Humidity",
+                f"{humidity}%"
+            )
+        with c4:
+            st.metric(
+                "🌧️ Rain Chance",
+                f"{rain_prob}%"
+            )
+        with c5:
+            st.metric(
+                "🌤️ Condition",
+                get_weather_emoji(current['weathercode'])
+            )
+
+        st.markdown("---")
+
+        # ── Weather Alert Box ──
+        if current['temperature'] >= 40:
+            st.error("🔥 Extreme Heat Alert! Temperature above 40°C in Roorkee")
+        elif current['temperature'] >= 35:
+            st.warning("⚠️ High Temperature Warning — Stay Hydrated!")
+        elif rain_prob >= 70:
+            st.info("🌧️ High chance of rain today — carry an umbrella!")
+        else:
+            st.success("✅ Weather looks normal today in Roorkee")
+
+    except Exception as e:
+        st.error(f"Could not fetch live weather: {e}")
+
+    st.markdown("---")
+
+    # ── Temperature Chart (rest of your existing tab1 code below) ──
+    st.subheader("🌡️ Temperature Trend with Anomalies")
 with tab1:
     st.subheader("🌡️ Temperature Trend with Anomalies")
 
